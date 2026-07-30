@@ -7,6 +7,6 @@ namespace GamersDock.Entities
         public string? Description { get; set; }
 
         // Navigation property to represent the relationship with Games
-        public ICollection<Game>? Games { get; set; }
+        public ICollection<Games>? Games { get; set; }
     }
 }

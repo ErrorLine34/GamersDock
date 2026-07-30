@@ -1,6 +1,7 @@
 using GamersDock.Data;
-using Microsoft.EntityFrameworkCore;
+using GamersDock.Endpoints;
 using GamersDock.Entities;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,11 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.MapGameEndpoints();
+app.MapProfileEndpoints();
+app.MapUserEndpoints();
+app.MapInstanceSettingsEndpoints();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

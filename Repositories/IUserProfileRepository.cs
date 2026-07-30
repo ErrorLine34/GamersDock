@@ -1,15 +1,15 @@
 ﻿using GamersDock.Entities;
+using GamersDock.Dtos;
 
 namespace GamersDock.Repositories
 {
     public interface IUserProfileRepository
     {
-
-        public Task<List<Profiles>> Get();
-        public Task<Profiles> Get(int id);
-        public Task Create(Profiles profile);
-        public Task Update(Profiles profile);
-        public Task Delete(Profiles profile);
-
+        Task<List<Profiles>> GetAllAsync();
+        Task<Profiles?> GetAsync(int id);
+        Task<Profiles> CreateAsync(CreateProfileRequest request);
+        Task<Profiles?> UpdateAsync(int id, UpdateProfileRequest request);
+        Task<bool> DeleteAsync(int id);
+        Task<bool> UpdateAvatarAsync(int id, UpdateAvatarRequest request);
     }
 }
