@@ -1,0 +1,6 @@
+@GamersDock_HostAddress = http://localhost:5204
+
+GET {{GamersDock_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
