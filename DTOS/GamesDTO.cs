@@ -59,9 +59,23 @@ namespace GamersDock.Dtos
     // of creation, not sent by the client.
     public record CreateJournalEntryRequest(string? Note, string? Mood);
 
-    public record UpdateStatusRequest(Status Status);
+    public record UpdateStatusRequest(Status Status, DateTime? date);
 
     public record UpdateRatingRequest(float? Rating);
 
     public record UpdateAchievementRequest(bool Unlocked);
+
+    // Admin create request for adding a new game to the catalog
+    public record CreateGameRequest(
+        int ExternalId,
+        string Name,
+        string? Description,
+        DateTime ReleaseDate,
+        string? Developer,
+        string? Publisher,
+        float? BasePrice,
+        float? Metascore,
+        string? FranchiseId,
+        string? EditionLabel
+    );
 }

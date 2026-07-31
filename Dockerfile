@@ -12,10 +12,9 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["GamersDock/GamersDock.csproj", "GamersDock/"]
-RUN dotnet restore "./GamersDock/GamersDock.csproj"
+COPY ["GamersDock.csproj", "./"]
+RUN dotnet restore "./GamersDock.csproj"
 COPY . .
-WORKDIR "/src/GamersDock"
 RUN dotnet build "./GamersDock.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
@@ -26,5 +25,6 @@ RUN dotnet publish "./GamersDock.csproj" -c $BUILD_CONFIGURATION -o /app/publish
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT=Development
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "GamersDock.dll"]

@@ -4,10 +4,11 @@ using GamersDock.Entities;
 
 namespace GamersDock.Data
 {
-    public class GamersDockContext(DbContextOptions<GamersDockContext> options) : IdentityDbContext<Users>(options)
+    public class GamersDockContext : IdentityDbContext<Users>
     {
-
-        public DbSet<Users> Users { get; set; }
+        public GamersDockContext(DbContextOptions<GamersDockContext> options) : base(options)
+        {
+        }
         public DbSet<Profiles> Profiles { get; set; }
         public DbSet<Games> Games { get; set; }
         public DbSet<Genre> Genres { get; set; }
