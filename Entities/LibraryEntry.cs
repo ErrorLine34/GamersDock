@@ -10,10 +10,11 @@ namespace GamersDock.Entities
         public DateTime DateAdded { get; set; }
         public DateTime LastUpdated { get; set; }
 
+
         // User and Profile data
         public int ProfileId { get; set; }
         public float HoursPlayed { get; set; }
-        public List<Platform>? OwnedPlatforms { get; set; }
+        public List<Platform>? OwnedPlatforms { get; set; } = new List<Platform>();
         public DateTime? StartedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
         public DateTime? DroppedDate { get; set; }

@@ -25,12 +25,15 @@ namespace GamersDock.Extensions
             g.Name ?? string.Empty,
             g.GameMedias?.FirstOrDefault()?.Url,
             g.Metascore,
-            Status.Backlog,
-            null,
-            0f
+            g.LibraryEntry?.Status ?? Status.Backlog,
+            g.LibraryEntry?.Rating,
+            g.LibraryEntry?.HoursPlayed ?? 0f
         );
 
-        public static GameDetailDto ToDetailDto(this Games g) => new(
+        public static GameDetailDto ToDetailDto(
+            this Games g,
+            IReadOnlyList<AchievementDto>? achievements = null,
+            IReadOnlyList<JournalEntryDto>? journal = null) => new(
             g.GameId,
             g.Name ?? string.Empty,
             g.Description ?? string.Empty,
@@ -42,13 +45,13 @@ namespace GamersDock.Extensions
             g.AverageRating,
             g.Genres?.Select(x => x.Name ?? string.Empty).ToList() ?? new List<string>(),
             g.Platforms?.Select(x => x.Name ?? string.Empty).ToList() ?? new List<string>(),
-            Status.Backlog,
-            null,
-            0f,
-            new List<AchievementDto>(),
-            new List<StorePriceDto>(),
-            new List<PricePointDto>(),
-            new List<JournalEntryDto>(),
+            g.LibraryEntry?.Status ?? Status.Backlog,
+            g.LibraryEntry?.Rating,
+            g.LibraryEntry?.HoursPlayed ?? 0f,
+            achievements ?? new List<AchievementDto>(),
+            g.StoreLinks?.Select(s => new StorePriceDto(s.StoreName, s.Url, null, s.CurrentDiscountPercentage)).ToList() ?? new List<StorePriceDto>(),
+            g.PriceHistory?.Select(p => new PricePointDto(p.RecordedAt, p.Region, null, p.DiscountPercent)).ToList() ?? new List<PricePointDto>(),
+            journal ?? new List<JournalEntryDto>(),
             g.FranchiseId,
             g.EditionLabel,
             new List<SiblingEditionDto>(),

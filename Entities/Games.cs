@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GamersDock.Entities
 {
@@ -22,6 +23,9 @@ namespace GamersDock.Entities
         public float AverageRating { get; set; }
         public string? FranchiseId { get; set; }
         public string? EditionLabel { get; set; }
+
+        [NotMapped]
+        public LibraryEntry? LibraryEntry { get; set; }
 
     }
 }
